@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   drawerHeader: {
-    backgroundColor: '#512DA8',
+    backgroundColor: '#78736E',
     height: 140,
     alignItems: 'center',
     justifyContent: 'center',
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
   drawerImage: {
     margin: 10,
     width: 80,
-    height: 60
+    height: 80
   }
 });
 
