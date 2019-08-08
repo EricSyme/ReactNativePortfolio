@@ -1,7 +1,33 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { PROJECTS } from '../shared/projects';
+import { COMMENTS } from '../shared/comments';
+
+
+function RenderComments(props) {
+    const comments = props.comments;
+            
+    const renderCommentItem = ({item, index}) => {
+        return (
+            <View key={index} style={{margin: 10}}>
+                <Text style={{fontSize: 14}}>{item.comment}</Text>
+                <Text style={{fontSize: 12}}>{item.rating} Stars</Text>
+                <Text style={{fontSize: 12}}>{'-- ' + item.author + ', ' + item.date} </Text>
+            </View>
+        );
+    };
+    
+    return (
+        <Card title='Comments' >
+        <FlatList 
+            data={comments}
+            renderItem={renderCommentItem}
+            keyExtractor={item => item.id.toString()}
+            />
+        </Card>
+    );
+}
 
 
 function RenderProject(props) {
@@ -52,9 +78,10 @@ class ProjectDetail extends Component {
     render() {
         const projectId = this.props.navigation.getParam('projectId','');
         return(
-            <RenderProject project={this.state.projects[+projectId]}
-                favorite={this.state.favorites.some(el => el === projectId)}
-                onPress={() => this.markFavorite(projectId)} />
+            <ScrollView>
+                <RenderProject project={this.state.projects[+projectId]} favorite={this.state.favorites.some(el => el ===  projectId)} onPress={() => this.markFavorite(projectId)} />
+                <RenderComments comments={this.state.comments.filter((comment) => comment.dishId === dishId)} />
+            </ScrollView>
         );
     }
 }

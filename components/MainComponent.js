@@ -6,7 +6,7 @@ import Contact from './ContactComponent';
 import ProjectDetail from './ProjectDetailComponent';
 import { View, Platform, Text, ScrollView, Image, StyleSheet } from 'react-native';
 import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements'
 
 const MenuNavigator = createStackNavigator({
         Menu: { screen: Menu,
