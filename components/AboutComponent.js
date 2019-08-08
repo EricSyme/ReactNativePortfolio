@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, FlatList  } from 'react-native';
 import { Card, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
 import { BIOGRAPHY } from '../shared/biography';
 
 

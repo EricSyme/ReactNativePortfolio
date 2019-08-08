@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
 import { PROJECTS } from '../shared/projects';
 import { COMMENTS } from '../shared/comments';
+import { postFavorite } from '../redux/ActionCreators';
+
+const mapStateToProps = state => {
+    return {
+      projects: state.projects,
+      comments: state.comments,
+      favorites: state.favorites
+    }
+  }
+
+const mapDispatchToProps = dispatch => ({
+    postFavorite: (projectId) => dispatch(postFavorite(projectId))
+})
+
 
 
 function RenderComments(props) {
@@ -72,18 +87,19 @@ class ProjectDetail extends Component {
     };
 
     markFavorite(projectId) {
-        this.setState({favorites: this.state.favorites.concat(projectId)});
+        //this.setState({favorites: this.state.favorites.concat(projectId)});
+        this.props.postFavorite(projectId);
     }
 
     render() {
         const projectId = this.props.navigation.getParam('projectId','');
         return(
             <ScrollView>
-                <RenderProject project={this.state.projects[+projectId]} favorite={this.state.favorites.some(el => el ===  projectId)} onPress={() => this.markFavorite(projectId)} />
-                <RenderComments comments={this.state.comments.filter((comment) => comment.dishId === dishId)} />
+                <RenderProject project={this.state.projects[+projectId]} favorite={this.props.favorites.some(el => el ===  projectId)} onPress={() => this.markFavorite(projectId)} />
+                <RenderComments comments={this.state.comments.filter((comment) => comment.projectId === projectId)} />
             </ScrollView>
         );
     }
 }
 
-export default ProjectDetail;
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetail);

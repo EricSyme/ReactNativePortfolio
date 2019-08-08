@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, FlatList } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { Tile } from 'react-native-elements';
 import { PROJECTS } from '../shared/projects';
 
 
@@ -21,7 +21,7 @@ class Menu extends Component {
         const renderMenuItem = ({item, index}) => {
 
             return (
-                <ListItem
+                <Tile
                 key={index}
                 title={item.name}
                 subtitle={item.description}
